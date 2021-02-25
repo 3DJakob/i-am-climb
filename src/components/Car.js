@@ -9,7 +9,10 @@ function Car ({ x, startY, dampening = 1 }) {
   const [y, setY] = useState(0)
 
   useEffect(() => {
-    setY(getNextY(y, dampening))
+    const fetch = async () => {
+      setY(await getNextY(y, dampening))
+    }
+    fetch()
   })
 
   return (
