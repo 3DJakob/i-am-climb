@@ -17,7 +17,7 @@ const getMs = () => {
 
 let lastTimeStamp = getMs()
 
-const getNextY = async (y, dampening) => {
+const simpleModel = async (y, dampening) => {
   await psleep(1)
   const h = (getMs() - lastTimeStamp) * eulerStep
   lastTimeStamp = getMs()
@@ -25,6 +25,26 @@ const getNextY = async (y, dampening) => {
   yPrim = yPrim + h * yBis
   y = y + h * yPrim
   return y
+}
+
+const basicModel = async (y, dampening) => {
+  await psleep(1)
+  return y
+}
+
+const fullModel = async (y, dampening) => {
+  await psleep(1)
+  return y
+}
+
+const getNextY = async (y, dampening, model = 'simple') => {
+  if (model === 'simple') {
+    return await simpleModel(y, dampening)
+  } else if (model === 'basic') {
+    return await basicModel(y, dampening)
+  } else if (model === 'full') {
+    return await fullModel(y, dampening)
+  }
 }
 
 export {
