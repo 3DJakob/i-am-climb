@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { getNextY } from './Physics'
+// import { getNextY } from './Physics'
+import { getNextY } from './Physics2'
 
 const height = 150
 const width = 400
@@ -7,10 +8,13 @@ const groundClearance = 100
 
 function Car ({ x, startY, dampening = 1 }) {
   const [y, setY] = useState(0)
+  const [startTime, setStartTime] = useState((new Date()).getTime())
 
   useEffect(() => {
     const fetch = async () => {
-      setY(await getNextY(y, dampening))
+      if ((new Date()).getTime() - 2000 < startTime) {
+        setY(await getNextY(y, dampening))
+      }
     }
     fetch()
   })
