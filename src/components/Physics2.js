@@ -49,12 +49,19 @@ const fullModel = async (lastX, dampening) => {
   // xdot = A * lastX + B * U
   const xdot = A.mmul(lastX.add(B.mmul(U)))
 
+  // Free fall (only if in the air)
+  xdot.set(1, 0, 0)
+  xdot.set(2, 0, U.get(2, 0) / m1)
+
   // x = lastX + xdot * h
   const x = lastX.add(Matrix.mul(xdot, h))
 
-  // Free fall
+  // OLD INCORRECT THINGS?
   // U_(1) = g*h+U_(1);
+  //   U.set(0, 0, -g * 0.1 * h + U.get(0, 0))
+
   // U_(2) = g*h+U_(2);
+  //   U.set(1, 0, -g * 0.1 * h + U.get(1, 0))
 
   await psleep(1)
   return x
