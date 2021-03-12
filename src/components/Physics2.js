@@ -15,7 +15,7 @@ const Jcm = 4000 // moment of inertia
 
 const A = new Matrix([
   [0, -k * Lv, -k, 0],
-  [Lv / Jcm, ((-Lv ^ 2 - Lh ^ 2) * b * Lh) / Jcm, (-(Lv - Lh) * b) / Jcm, (Lv - Lh) / Jcm],
+  [Lv / Jcm, ((-Lv ^ 2 - Lh ^ 2) * b) / Jcm, (-(Lv - Lh) * b) / Jcm, -Lh / Jcm],
   [1 / m1, (-b * Lv + b * Lh) / m1, -2 * b / m1, 1 / m1],
   [0, k * Lh, -k, 0]
 ])
